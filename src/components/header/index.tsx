@@ -43,7 +43,7 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
   }
 
   return (
-    <AntdLayout.Header style={headerStyles}>
+    <AntdLayout.Header style={headerStyles} title="ProjectaLogs">
       <Space>
         <Switch
           checkedChildren="🌛"
