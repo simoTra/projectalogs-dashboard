@@ -1,26 +1,25 @@
-import React from "react";
-import { Edit, useForm } from "@refinedev/antd";
-import { Form, Input } from "antd";
+import { Edit, useForm, useSelect } from "@refinedev/antd";
+import { Form, Input, Select } from "antd";
+import { IClient } from "../../interfaces";
 
 export const ProjectEdit = () => {
     const { formProps, saveButtonProps, query } = useForm();
 
     const projectData = query?.data?.data;
 
+/*     const { selectProps: jobsSelectProps } = useSelect({
+        resource: "job",
+        defaultValue: projectData?.jobs,
+    }); */
+
+    const { selectProps: clientSelectProps } = useSelect<IClient>({
+        resource: "client",
+        optionLabel: "name",
+    });
+
     return (
         <Edit saveButtonProps={saveButtonProps}>
             <Form {...formProps} layout="vertical">
-                <Form.Item
-                    label="Id"
-                    name={["id"]}
-                    rules={[
-                        {
-                            required: true,
-                        },
-                    ]}
-                >
-                    <Input readOnly disabled />
-                </Form.Item>
                 <Form.Item
                     label="Name"
                     name={["name"]}
@@ -35,13 +34,20 @@ export const ProjectEdit = () => {
                 <Form.Item
                     label="Description"
                     name={["description"]}
-                    rules={[
-                        {
-                            required: true,
-                        },
-                    ]}
                 >
                     <Input />
+                </Form.Item>
+                {/* <Form.Item
+                    label="Jobs"
+                    name={"jobs"}
+                >
+                    <Select mode="multiple" {...jobsSelectProps} />
+                </Form.Item> */}
+                <Form.Item
+                    label="Client"
+                    name={["client", "id"]}
+                >
+                    <Select {...clientSelectProps} />
                 </Form.Item>
             </Form>
         </Edit>

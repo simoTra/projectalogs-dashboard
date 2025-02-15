@@ -1,5 +1,5 @@
 import { Refine } from "@refinedev/core";
-import { DevtoolsPanel, DevtoolsProvider } from "@refinedev/devtools";
+//import { DevtoolsPanel, DevtoolsProvider } from "@refinedev/devtools";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 import { AntdInferencer } from "@refinedev/inferencer/antd";
 
@@ -24,6 +24,7 @@ import { ColorModeContextProvider } from "./contexts/color-mode";
 import dataProvider from "./components/dataProvider";
 import { ClientEdit, ClientList } from "./pages/client";
 import { DatabaseOutlined } from "@ant-design/icons";
+import { ProjectCreate, ProjectEdit, ProjectList, ProjectShow } from "./pages/project";
 
 function App() {
   const API_URL = "http://localhost:3000";
@@ -32,7 +33,7 @@ function App() {
       <RefineKbarProvider>
         <ColorModeContextProvider>
           <AntdApp>
-            <DevtoolsProvider>
+            {/* <DevtoolsProvider> */}
               <Refine
                 dataProvider={dataProvider(API_URL)}
                 notificationProvider={useNotificationProvider}
@@ -123,18 +124,18 @@ function App() {
                       element={<NavigateToResource resource="client" />}
                     />
                     <Route path="/project">
-                      <Route path="/project" element={<AntdInferencer />} />
+                      <Route path="/project" element={<ProjectList />} />
                       <Route
                         path="/project/create"
-                        element={<AntdInferencer />}
+                        element={<ProjectCreate />}
                       />
                       <Route
                         path="/project/edit/:id"
-                        element={<AntdInferencer />}
+                        element={<ProjectEdit />}
                       />
                       <Route
                         path="/project/show/:id"
-                        element={<AntdInferencer />}
+                        element={<ProjectShow />}
                       />
                       {/*                       <Route path="/project" element={<ProjectList />} />
                       <Route path="/project/create" element={<ProjectCreate />} />
@@ -175,9 +176,9 @@ function App() {
                 <RefineKbar />
                 <UnsavedChangesNotifier />
                 <DocumentTitleHandler />
-              </Refine>
+              </Refine>{/* 
               <DevtoolsPanel />
-            </DevtoolsProvider>
+            </DevtoolsProvider> */}
           </AntdApp>
         </ColorModeContextProvider>
       </RefineKbarProvider>
