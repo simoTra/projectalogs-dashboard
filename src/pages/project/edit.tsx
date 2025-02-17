@@ -47,7 +47,7 @@ export const ProjectEdit = () => {
                     label="Client"
                     name={["client", "id"]}
                 >
-                    <Select {...clientSelectProps} />
+                    <Select {...clientSelectProps} allowClear />
                 </Form.Item>
             </Form>
         </Edit>

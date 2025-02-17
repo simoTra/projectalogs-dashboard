@@ -49,7 +49,7 @@ export const ClientEdit = () => {
                         return selected?.map((item) => ({ id: item }));
                     }}
                 >
-                    <Select mode="multiple" {...projectsSelectProps} />
+                    <Select mode="multiple" {...projectsSelectProps}  allowClear/>
                 </Form.Item>
             </Form>
         </Edit>

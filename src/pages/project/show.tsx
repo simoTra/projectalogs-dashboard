@@ -1,4 +1,3 @@
-import React from "react";
 import { useShow } from "@refinedev/core";
 import { Show, NumberField, TagField, TextField } from "@refinedev/antd";
 import { Typography } from "antd";

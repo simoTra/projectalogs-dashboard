@@ -9,6 +9,7 @@ export const ProjectCreate = () => {
     resource: "client",
     optionLabel: "name",
   });
+
   return (
     <Create saveButtonProps={saveButtonProps}>
       <Form {...formProps} layout="vertical">
@@ -27,7 +28,7 @@ export const ProjectCreate = () => {
           <Input />
         </Form.Item>
         <Form.Item label="Client" name={["client", "id"]}>
-          <Select {...clientSelectProps} />
+          <Select {...clientSelectProps} allowClear />
         </Form.Item>
       </Form>
     </Create>
