@@ -30,6 +30,7 @@ import {
   ProjectList,
   ProjectShow,
 } from "./pages/project";
+import { PrinterCreate, PrinterEdit, PrinterList, PrinterShow } from "./pages/printer";
 
 function App() {
   const API_URL = "http://localhost:3000";
@@ -55,6 +56,16 @@ function App() {
                   },
                 },
                 {
+                  name: "job",
+                  list: "/job",
+                  create: "/job/create",
+                  edit: "/job/edit/:id",
+                  show: "/job/show/:id",
+                  meta: {
+                    canDelete: true,
+                  },
+                },
+                {
                   name: "client",
                   list: "/client",
                   create: "/client/create",
@@ -65,11 +76,11 @@ function App() {
                   },
                 },
                 {
-                  name: "job",
-                  list: "/job",
-                  create: "/job/create",
-                  edit: "/job/edit/:id",
-                  show: "/job/show/:id",
+                  name: "printer",
+                  list: "/printer",
+                  create: "/printer/create",
+                  edit: "/printer/edit/:id",
+                  show: "/printer/show/:id",
                   meta: {
                     canDelete: true,
                   },
@@ -148,6 +159,12 @@ function App() {
                       path="/client/show/:id"
                       element={<ClientShow />}
                     />
+                  </Route>
+                  <Route path="/printer">
+                    <Route path="/printer" element={<PrinterList />} />
+                    <Route path="/printer/create" element={<PrinterCreate />} />
+                    <Route path="/printer/edit/:id" element={<PrinterEdit />} />
+                    <Route path="/printer/show/:id" element={<PrinterShow />} />
                   </Route>
                   <Route path="*" element={<ErrorComponent />} />
                 </Route>

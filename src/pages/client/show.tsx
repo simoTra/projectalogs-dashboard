@@ -1,7 +1,7 @@
 import { useShow } from "@refinedev/core";
 import { Show, NumberField, TagField, TextField } from "@refinedev/antd";
 import { List, Typography } from "antd";
-import { IClient } from "../../interfaces";
+import { IClient, IProject } from "../../interfaces";
 
 const { Title } = Typography;
 
@@ -13,6 +13,8 @@ export const ClientShow = () => {
 
   return (
     <Show isLoading={isLoading}>
+      <Title level={5}>Id</Title>
+      <NumberField value={record?.id ?? ""} />
       <Title level={5}>Name</Title>
       <TextField value={record?.name} />
       <Title level={5}>Projects</Title>
@@ -21,7 +23,7 @@ export const ClientShow = () => {
       ) : (
         <>
           {record?.projects?.length ? (
-            data?.data?.projects?.map((project: any) => (
+            record?.projects?.map((project: IProject) => (
               <TagField key={project?.name} value={project?.name} />
             ))
           ) : (

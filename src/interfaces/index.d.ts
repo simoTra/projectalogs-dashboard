@@ -1,7 +1,7 @@
 export interface IClient {
   id: number;
   name: string;
-  projects?: Project[];
+  projects?: IProject[];
 }
 
 export interface IJob {
@@ -45,7 +45,8 @@ export interface IJob {
     units?: string | null;
   }[];
   exists?: boolean;
-  project?: Project;
+  project?: IProject;
+  printer?: IPrinter;
 }
 
 export interface IProject {
@@ -53,5 +54,11 @@ export interface IProject {
   name: string;
   description?: string;
   client?: Client;
+  jobs?: Job[];
+}
+export interface IPrinter {
+  id: number;
+  name: string;
+  ipAddress?: string;
   jobs?: Job[];
 }

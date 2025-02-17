@@ -1,4 +1,3 @@
-import React from "react";
 import { BaseRecord } from "@refinedev/core";
 import {
     useTable,
@@ -6,7 +5,6 @@ import {
     EditButton,
     ShowButton,
     DeleteButton,
-    TagField,
 } from "@refinedev/antd";
 import { Space, Table, Tag } from "antd";
 
