@@ -49,6 +49,11 @@ export interface IJob {
   printer?: IPrinter;
 }
 
+export interface IJobFilterVariables {
+  status: string;
+  //project: IProject;
+}
+
 export interface IProject {
   id: number;
   name: string;

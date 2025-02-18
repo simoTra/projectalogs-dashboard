@@ -31,6 +31,7 @@ import {
   ProjectShow,
 } from "./pages/project";
 import { PrinterCreate, PrinterEdit, PrinterList, PrinterShow } from "./pages/printer";
+import { JobList } from "./pages/job";
 
 function App() {
   const API_URL = "http://localhost:3000";
@@ -146,7 +147,7 @@ function App() {
                     <Route path="/project/show/:id" element={<ProjectShow />} />
                   </Route>
                   <Route path="/job">
-                    <Route path="/job" element={<AntdInferencer />} />
+                    <Route path="/job" element={<JobList />} />
                     <Route path="/job/create" element={<AntdInferencer />} />
                     <Route path="/job/edit/:id" element={<AntdInferencer />} />
                     <Route path="/job/show/:id" element={<AntdInferencer />} />

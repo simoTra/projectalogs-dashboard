@@ -15,15 +15,7 @@ export const PrinterList = () => {
         syncWithLocation: true,
     });
 
-    const { data: jobsData, isLoading: jobsIsLoading } = useMany<IJob>({
-        resource: "job",
-        ids: [].concat(
-            ...(tableProps?.dataSource?.map((item) => item?.jobs) ?? []),
-        ),
-        queryOptions: {
-            enabled: !!tableProps?.dataSource,
-        },
-    }); 
+
 
     return (
         <List>
@@ -35,9 +27,7 @@ export const PrinterList = () => {
                     dataIndex="jobs"
                     title="Jobs"
                     render={(value: IJob[]) =>
-                        jobsIsLoading ? (
-                            <>Loading...</>
-                        ) : (
+                    (
                             <>{value.length}
                                {/*  {value?.map((item, index) => (
                                     <TagField key={index} value={item.filename?.substring(0, 5) + '...'} />
