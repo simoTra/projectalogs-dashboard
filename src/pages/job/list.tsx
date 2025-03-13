@@ -52,6 +52,8 @@ export const JobList = () => {
         <List>
           <Table {...tableProps} rowKey="id">
             <Table.Column dataIndex="id" title="Id" />
+            <Table.Column dataIndex="job_id" title="Id" />
+            <Table.Column dataIndex="start_time" title="Start Time" render={(value) => new Date(value * 1000).toLocaleString() }/>
             <Table.Column
               title="Printer"
               render={(value: IJob) => `${value.printer?.name}`}

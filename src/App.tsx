@@ -17,168 +17,224 @@ import routerBindings, {
   NavigateToResource,
   UnsavedChangesNotifier,
 } from "@refinedev/react-router";
-import { App as AntdApp, Layout } from "antd";
+import { App as AntdApp, ConfigProvider, Layout } from "antd";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router";
 import { Header } from "./components/header";
 import { ColorModeContextProvider } from "./contexts/color-mode";
 import dataProvider from "./components/dataProvider";
-import { ClientCreate, ClientEdit, ClientList, ClientShow } from "./pages/client";
-import { DatabaseOutlined } from "@ant-design/icons";
+import {
+  ClientCreate,
+  ClientEdit,
+  ClientList,
+  ClientShow,
+} from "./pages/client";
+import {
+  DatabaseOutlined,
+  FolderOutlined,
+  PieChartOutlined,
+  PrinterOutlined,
+  ProjectOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import {
   ProjectCreate,
   ProjectEdit,
   ProjectList,
   ProjectShow,
 } from "./pages/project";
-import { PrinterCreate, PrinterEdit, PrinterList, PrinterShow } from "./pages/printer";
+import {
+  PrinterCreate,
+  PrinterEdit,
+  PrinterList,
+  PrinterShow,
+} from "./pages/printer";
 import { JobList } from "./pages/job";
+import { Dashboard } from "./pages/dashboard";
 
 function App() {
   const API_URL = "http://localhost:3000";
+
   return (
     <BrowserRouter>
       <RefineKbarProvider>
         <ColorModeContextProvider>
-          <AntdApp>
-            {/* <DevtoolsProvider> */}
-            <Refine
-              dataProvider={dataProvider(API_URL)}
-              notificationProvider={useNotificationProvider}
-              routerProvider={routerBindings}
-              resources={[
-                {
-                  name: "project",
-                  list: "/project",
-                  create: "/project/create",
-                  edit: "/project/edit/:id",
-                  show: "/project/show/:id",
-                  meta: {
-                    canDelete: true,
+          {/* <ConfigProvider theme={themeConfig}> */}
+            <AntdApp>
+              {/* <DevtoolsProvider> */}
+              <Refine
+                dataProvider={dataProvider(API_URL)}
+                notificationProvider={useNotificationProvider}
+                routerProvider={routerBindings}
+                resources={[
+                  {
+                    name: "dashboard",
+                    list: "/",
+                    meta: {
+                      label: "Dashboard",
+                      canDelete: false,
+                      icon: <PieChartOutlined />,
+                    },
                   },
-                },
-                {
-                  name: "job",
-                  list: "/job",
-                  create: "/job/create",
-                  edit: "/job/edit/:id",
-                  show: "/job/show/:id",
-                  meta: {
-                    canDelete: true,
+                  {
+                    name: "project",
+                    list: "/project",
+                    create: "/project/create",
+                    edit: "/project/edit/:id",
+                    show: "/project/show/:id",
+                    meta: {
+                      canDelete: true,
+                      icon: <ProjectOutlined />,
+                    },
                   },
-                },
-                {
-                  name: "client",
-                  list: "/client",
-                  create: "/client/create",
-                  edit: "/client/edit/:id",
-                  show: "/client/show/:id",
-                  meta: {
-                    canDelete: true,
+                  {
+                    name: "job",
+                    list: "/job",
+                    create: "/job/create",
+                    edit: "/job/edit/:id",
+                    show: "/job/show/:id",
+                    meta: {
+                      canDelete: true,
+                      icon: <FolderOutlined />,
+                    },
                   },
-                },
-                {
-                  name: "printer",
-                  list: "/printer",
-                  create: "/printer/create",
-                  edit: "/printer/edit/:id",
-                  show: "/printer/show/:id",
-                  meta: {
-                    canDelete: true,
+                  {
+                    name: "client",
+                    list: "/client",
+                    create: "/client/create",
+                    edit: "/client/edit/:id",
+                    show: "/client/show/:id",
+                    meta: {
+                      canDelete: true,
+                      icon: <UserOutlined />,
+                    },
                   },
-                },
-              ]}
-              options={{
-                syncWithLocation: true,
-                warnWhenUnsavedChanges: true,
-                useNewQueryKeys: true,
-                projectId: "SHzJAm-gbWyKh-kL7d5G",
-              }}
-            >
-              <Routes>
-                <Route
-                  element={
-                    <ThemedLayoutV2
-                      Header={() => <Header sticky />}
-                      Sider={(props) => <ThemedSiderV2 {...props} fixed />}
-                      Title={({ collapsed }) => (
-                        <ThemedTitleV2
-                          collapsed={collapsed}
-                          icon={
-                            collapsed ? (
-                              <DatabaseOutlined />
-                            ) : (
-                              <DatabaseOutlined />
-                            )
-                          }
-                          text="ProjectaLogs"
-                        />
-                      )}
-                      Footer={() => (
-                        <Layout.Footer
-                          style={{
-                            textAlign: "center",
-                            color: "#fff",
-                          }}
-                        >
-                          ProjectaLogs ©2025 Created by Simone Traversi
-                        </Layout.Footer>
-                      )}
-                    >
-                      <Outlet />
-                    </ThemedLayoutV2>
-                  }
-                >
+                  {
+                    name: "printer",
+                    list: "/printer",
+                    create: "/printer/create",
+                    edit: "/printer/edit/:id",
+                    show: "/printer/show/:id",
+                    meta: {
+                      canDelete: true,
+                      icon: <PrinterOutlined />,
+                    },
+                  },
+                ]}
+                options={{
+                  syncWithLocation: true,
+                  warnWhenUnsavedChanges: true,
+                  useNewQueryKeys: true,
+                  projectId: "SHzJAm-gbWyKh-kL7d5G",
+                }}
+              >
+                <Routes>
                   <Route
-                    index
-                    element={<NavigateToResource resource="project" />}
-                  />
-                  <Route
-                    index
-                    element={<NavigateToResource resource="job" />}
-                  />
-                  <Route
-                    index
-                    element={<NavigateToResource resource="client" />}
-                  />
-                  <Route path="/project">
-                    <Route path="/project" element={<ProjectList />} />
-                    <Route path="/project/create" element={<ProjectCreate />} />
-                    <Route path="/project/edit/:id" element={<ProjectEdit />} />
-                    <Route path="/project/show/:id" element={<ProjectShow />} />
-                  </Route>
-                  <Route path="/job">
-                    <Route path="/job" element={<JobList />} />
-                    <Route path="/job/create" element={<AntdInferencer />} />
-                    <Route path="/job/edit/:id" element={<AntdInferencer />} />
-                    <Route path="/job/show/:id" element={<AntdInferencer />} />
-                  </Route>
-                  <Route path="/client">
-                    <Route path="/client" element={<ClientList />} />
-                    <Route path="/client/create" element={<ClientCreate />} />
-                    <Route path="/client/edit/:id" element={<ClientEdit />} />
+                    element={
+                      <ThemedLayoutV2
+                        Header={() => <Header sticky />}
+                        Sider={(props) => <ThemedSiderV2 {...props} fixed />}
+                        Title={({ collapsed }) => (
+                          <ThemedTitleV2
+                            collapsed={collapsed}
+                            icon={
+                              collapsed ? (
+                                <DatabaseOutlined />
+                              ) : (
+                                <DatabaseOutlined />
+                              )
+                            }
+                            text="ProjectaLogs"
+                          />
+                        )}
+                        Footer={() => (
+                          <Layout.Footer
+                            style={{
+                              textAlign: "center",
+                              color: "#fff",
+                            }}
+                          >
+                            ProjectaLogs ©2025 Created by Simone Traversi
+                          </Layout.Footer>
+                        )}
+                      >
+                        <Outlet />
+                      </ThemedLayoutV2>
+                    }
+                  >
+                    <Route index element={<Dashboard />} />
                     <Route
-                      path="/client/show/:id"
-                      element={<ClientShow />}
+                      index
+                      element={<NavigateToResource resource="project" />}
                     />
+                    <Route
+                      index
+                      element={<NavigateToResource resource="job" />}
+                    />
+                    <Route
+                      index
+                      element={<NavigateToResource resource="client" />}
+                    />
+                    <Route path="/project">
+                      <Route path="/project" element={<ProjectList />} />
+                      <Route
+                        path="/project/create"
+                        element={<ProjectCreate />}
+                      />
+                      <Route
+                        path="/project/edit/:id"
+                        element={<ProjectEdit />}
+                      />
+                      <Route
+                        path="/project/show/:id"
+                        element={<ProjectShow />}
+                      />
+                    </Route>
+                    <Route path="/job">
+                      <Route path="/job" element={<JobList />} />
+                      <Route path="/job/create" element={<AntdInferencer />} />
+                      <Route
+                        path="/job/edit/:id"
+                        element={<AntdInferencer />}
+                      />
+                      <Route
+                        path="/job/show/:id"
+                        element={<AntdInferencer />}
+                      />
+                    </Route>
+                    <Route path="/client">
+                      <Route path="/client" element={<ClientList />} />
+                      <Route path="/client/create" element={<ClientCreate />} />
+                      <Route path="/client/edit/:id" element={<ClientEdit />} />
+                      <Route path="/client/show/:id" element={<ClientShow />} />
+                    </Route>
+                    <Route path="/printer">
+                      <Route path="/printer" element={<PrinterList />} />
+                      <Route
+                        path="/printer/create"
+                        element={<PrinterCreate />}
+                      />
+                      <Route
+                        path="/printer/edit/:id"
+                        element={<PrinterEdit />}
+                      />
+                      <Route
+                        path="/printer/show/:id"
+                        element={<PrinterShow />}
+                      />
+                    </Route>
+                    <Route path="*" element={<ErrorComponent />} />
                   </Route>
-                  <Route path="/printer">
-                    <Route path="/printer" element={<PrinterList />} />
-                    <Route path="/printer/create" element={<PrinterCreate />} />
-                    <Route path="/printer/edit/:id" element={<PrinterEdit />} />
-                    <Route path="/printer/show/:id" element={<PrinterShow />} />
-                  </Route>
-                  <Route path="*" element={<ErrorComponent />} />
-                </Route>
-              </Routes>
+                </Routes>
 
-              <RefineKbar />
-              <UnsavedChangesNotifier />
-              <DocumentTitleHandler />
-            </Refine>
-            {/* 
+                <RefineKbar />
+                <UnsavedChangesNotifier />
+                <DocumentTitleHandler />
+              </Refine>
+              {/* 
               <DevtoolsPanel />
             </DevtoolsProvider> */}
-          </AntdApp>
+            </AntdApp>
+          {/* </ConfigProvider> */}
         </ColorModeContextProvider>
       </RefineKbarProvider>
     </BrowserRouter>
